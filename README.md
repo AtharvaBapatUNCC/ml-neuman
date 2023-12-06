@@ -1,3 +1,58 @@
+# CCN-_PROJECT_FALL2023
+### ATHARVA BAPAT-801310030,
+### NIKHIL BANSAL - 801310666,
+### RHYTHM AGRAWAL - 801310679,
+### RIA BANERJEE - 801305186,
+This is a repository refers to the project for NERF we used. That is creating an video output from a images input. where the subject in the
+images creates novel poses. This Repo contains the code for creating
+the output image and then Streamlit Code to showcase the client server
+application using localtunnel to create a novel pose video from
+images.
+
+#### First Step
+Create the Enviornment Using
+conda create -n neuman_env python=3.7 -y;
+#### Second Step
+conda activate neuman_env;
+#### Third Step
+conda install pytorch==1.8.0 torchvision==0.9.0 cudatoolkit=10.2 -c pytorch;
+#### Fourth Step
+conda install -c fvcore -c iopath -c conda-forge fvcore iopath;
+#### Fifth Step
+conda install -c bottler nvidiacub;
+conda install pytorch3d -c pytorch3d;
+conda install -c conda-forge igl;
+#### Sixth Step
+pip install opencv-python joblib open3d imageio tensorboardX chumpy lpips scikit-image ipython matplotlib;
+
+#### First Step
+Run the Commands to generate images. We have made an improvise that we add --use_cuda=no in the command to avoid using large GPU and processing.
+#
+Render 360 views of a canonical human:
+python render_360.py --use_cuda=no --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar --mode canonical_360
+# 
+Render 360 views of a posed human:
+python render_360.py --use_cuda=no --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar --mode posed_360
+#
+Render test views of a sequence, and evaluate the metrics:
+python render_test_views.py --use_cuda=no --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar
+#
+Render novel poses with the background:
+python render_reposing.py --use_cuda=no --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar --motion_name=jumpandroll
+#
+Render telegathering:
+python render_gathering.py --use_cuda=no --actors parkinglot seattle citron --scene_dir ./data/seattle --weights_path ./out/seattle_human/checkpoint.pth.tar
+
+## NEXT PART
+After we run the commands we get the output images. This folder contains the streamlit code that can be run through Google colab. Then upload the images that e obtain the demo folder. Click on create video. Comeback to Google Colab refresh the temporary files section and then You can see the generated video as "output_video1.mp4".
+
+
+
+
+
+
+
+
 ## NeuMan: Neural Human Radiance Field from a Single Video
 
 This repository is a reference implementation for NeuMan. NeuMan reconstructs both the background scene and an animatable human from a single video using neural radiance fields.
@@ -94,36 +149,6 @@ conda activate neuman_env
    ```
 
 - Render using pretrained model
-
-  Render 360 views of a canonical human:
-      
-  ```sh
-  python render_360.py --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar --mode canonical_360
-  ```
-     
-  Render 360 views of a posed human:
-      
-  ```sh
-  python render_360.py --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar --mode posed_360
-  ```
-
-  Render test views of a sequence, and evaluate the metrics:
-     
-  ```sh
-  python render_test_views.py --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar
-  ```
-      
-  Render novel poses with the background:
-      
-  ```sh
-  python render_reposing.py --scene_dir ./data/bike --weights_path ./out/bike_human/checkpoint.pth.tar --motion_name=jumpandroll
-  ```
-      
-  Render telegathering:
-      
-  ```sh
-  python render_gathering.py --actors parkinglot seattle citron --scene_dir ./data/seattle --weights_path ./out/seattle_human/checkpoint.pth.tar
-  ```
 
 
 ### Training
